@@ -3,9 +3,11 @@
   max-width: 520px;
   margin: 0 auto;
   padding: 1rem;
-  position: absolute;
-  top: 261px;
+  position: fixed;
+  top: 189px;
   bottom: 0;
+  left: 0;
+  right: 0;
   overflow-y: auto;
 }
 .calculatorDefaultInputs {
@@ -33,15 +35,15 @@
 }
 .priceCard {
   position: fixed;
-  top: 135px;
+  top: 93px;
   width: 100%;
   text-align: center;
 }
 .priceCard .card {
-  padding: 1rem;
+  padding: 0 0.5rem 0.5rem 0.5rem;
 }
 .priceCard .card-body {
-  padding: 1rem 0 0 0;
+  padding: 0.5rem 0 0 0;
   gap: 0;
 }
 .priceCard .badge {

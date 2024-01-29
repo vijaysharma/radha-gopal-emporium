@@ -57,17 +57,17 @@ const PriceCalculator = () => {
       <div className="calculator">
         <div className="calculatorDefaultInputs">
           <Labelnput
-            labelText="Rate of cloth per meter"
+            labelText="Cloth/mtr"
             inputValue={inputValues.clothRate}
             onChangehandler={(e) => inputOnChange(e, "clothRate")}
           />
           <Labelnput
-            labelText="Rate of linen per meter"
+            labelText="Linen/mtr"
             inputValue={inputValues.linenRate}
             onChangehandler={(e) => inputOnChange(e, "linenRate")}
           />
           <Labelnput
-            labelText="Min Labour Cost"
+            labelText="Min. Lab."
             inputValue={inputValues.labour}
             onChangehandler={(e) => inputOnChange(e, "labour")}
           />
