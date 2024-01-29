@@ -1,38 +1,41 @@
-.App {
+.calculator {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 297px 1rem 1rem 1rem;
+}
+.trash {
+  color: rgb(59 130 246 / 0.9);
+}
+.trash:hover {
+  color: rgba(255, 25, 75, 0.9);
+}
+.trash.disabled,
+.trash.disabled:hover {
+  color: rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
+}
+.header {
+  width: 100%;
+  top: 0;
+  position: fixed;
+  text-align: center;
+  padding: 1rem;
+}
+.priceCard {
+  position: fixed;
+  top: 135px;
+  width: 100%;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.priceCard .card {
+  padding: 1rem;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.priceCard .card-body {
+  padding: 1rem 0 0 0;
+  gap: 0;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.priceCard .badge {
+  height: 45px;
+  border-color: #65c3c8;
 }
