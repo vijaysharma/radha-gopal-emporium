@@ -2,11 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { priceCtx } from "../store/priceContext";
 import Labelnput from "./Labelnput";
 import ClothPiece from "./ClothPiece";
-import {
-  calculateFinalPrice,
-  clothValueFinder,
-  inputValueSanitiser,
-} from "./utilities";
+import { calculateFinalPrice, clothValueFinder } from "./utilities";
 
 const PriceCalculator = () => {
   const [inputValues, setInputValues] = useState({
@@ -32,8 +28,8 @@ const PriceCalculator = () => {
       indexOfCloth = index;
       return cl.id === id;
     });
-    if (e.target.name === "length") cloth.length = inputValueSanitiser(e);
-    if (e.target.name === "width") cloth.width = inputValueSanitiser(e);
+    if (e.target.name === "length") cloth.length = e.target.value;
+    if (e.target.name === "width") cloth.width = e.target.value;
     if (e.target.name === "checkbox") cloth.linenRequired = e.target.checked;
     if (trash) updatedClothes.splice(indexOfCloth, 1);
     setClothes([...updatedClothes]);
@@ -46,7 +42,7 @@ const PriceCalculator = () => {
   const inputOnChange = (e, key) =>
     setInputValues({
       ...inputValues,
-      [key]: inputValueSanitiser(e),
+      [key]: e.target.value,
     });
 
   useEffect(() => {

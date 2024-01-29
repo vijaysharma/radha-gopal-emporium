@@ -7,7 +7,7 @@ const Labelnput = ({
   onChangehandler,
 }) => {
   return (
-    <label className="form-control text-center max-w-24 inline-block cursor-pointer">
+    <label className="form-control text-center max-w-20 inline-block cursor-pointer">
       <div className="label">
         <span className="label-text">
           {labelText} <strong>({defaultSymbol})</strong>:
@@ -16,7 +16,7 @@ const Labelnput = ({
       <input
         type="text"
         placeholder="Enter"
-        className="input input-bordered input-primary max-w-24"
+        className="input input-bordered input-primary max-w-20"
         value={inputValue}
         onChange={(e) => onChangehandler(e)}
       />
