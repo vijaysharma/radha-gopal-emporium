@@ -2,7 +2,16 @@
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  padding: 297px 1rem 1rem 1rem;
+  padding: 1rem;
+  position: absolute;
+  top: 261px;
+  bottom: 0;
+  overflow-y: auto;
+}
+.calculatorDefaultInputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
 }
 .trash {
   color: rgb(59 130 246 / 0.9);

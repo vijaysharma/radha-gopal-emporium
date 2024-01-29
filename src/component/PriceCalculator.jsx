@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { priceCtx } from "../store/priceContext";
+import Labelnput from "./Labelnput";
 import ClothPiece from "./ClothPiece";
 import {
   calculateFinalPrice,
@@ -54,58 +55,30 @@ const PriceCalculator = () => {
   return (
     <>
       <div className="calculator">
-        <label className="label cursor-pointer">
-          <span className="label-text">
-            Rate of cloth per meter <strong>(₹)</strong>:
-          </span>
-          <input
-            type="text"
-            id="cloth_rate"
-            placeholder="Type the price rate"
-            className="input input-bordered input-primary max-w-xs"
-            value={inputValues.clothRate}
-            onChange={(e) => inputOnChange(e, "clothRate")}
+        <div className="calculatorDefaultInputs">
+          <Labelnput
+            labelText="Rate of cloth per meter"
+            inputValue={inputValues.clothRate}
+            onChangehandler={(e) => inputOnChange(e, "clothRate")}
           />
-        </label>
-        <label className="label cursor-pointer">
-          <span className="label-text">
-            Rate of linen per meter <strong>(₹)</strong>:
-          </span>
-          <input
-            type="text"
-            id="linen_rate"
-            placeholder="Type the price rate"
-            className="input input-bordered input-primary max-w-xs"
-            value={inputValues.linenRate}
-            onChange={(e) => inputOnChange(e, "linenRate")}
+          <Labelnput
+            labelText="Rate of linen per meter"
+            inputValue={inputValues.linenRate}
+            onChangehandler={(e) => inputOnChange(e, "linenRate")}
           />
-        </label>
-        <label className="label cursor-pointer">
-          <span className="label-text">
-            Minimum Labour Cost <strong>(₹)</strong>:
-          </span>
-          <input
-            type="text"
-            id="labour_rate"
-            placeholder="Type the minimum labout cost"
-            className="input input-bordered input-primary max-w-xs"
-            value={inputValues.labour}
-            onChange={(e) => inputOnChange(e, "labour")}
+          <Labelnput
+            labelText="Min Labour Cost"
+            inputValue={inputValues.labour}
+            onChangehandler={(e) => inputOnChange(e, "labour")}
           />
-        </label>
-        <label className="label cursor-pointer">
-          <span className="label-text">
-            Profit <strong>(%)</strong>:
-          </span>
-          <input
-            type="text"
-            id="profit_rate"
-            placeholder="Type the profit percentage"
-            className="input input-bordered input-primary max-w-xs"
-            value={inputValues.profit}
-            onChange={(e) => inputOnChange(e, "profit")}
+          <Labelnput
+            labelText="Profit"
+            inputValue={inputValues.profit}
+            defaultSymbol="%"
+            onChangehandler={(e) => inputOnChange(e, "profit")}
           />
-        </label>
+        </div>
+        <br />
         {clothes.map((cloth) => {
           return (
             <ClothPiece
