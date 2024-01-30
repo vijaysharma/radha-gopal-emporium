@@ -7,9 +7,9 @@ const Labelnput = ({
   onChangehandler,
 }) => {
   return (
-    <label className="form-control text-center max-w-20 inline-block cursor-pointer">
+    <label className="form-control text-center max-w-24 inline-block cursor-pointer">
       <div className="label">
-        <span className="label-text">
+        <span className="label-text text-xs">
           {labelText} <strong>({defaultSymbol})</strong>:
         </span>
       </div>
