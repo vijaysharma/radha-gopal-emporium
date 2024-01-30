@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const themes = [
   "light",
@@ -39,14 +39,19 @@ const Logo = () => {
   const getRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "cupcake"
+  );
+  useEffect(() => {
+    window.document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   return (
     <div
       className="header bg-primary text-center"
       onClick={(e) => {
-        window.document.documentElement.setAttribute(
-          "data-theme",
-          themes[getRandomNumber(0, themes.length)]
-        );
+        setTheme(themes[getRandomNumber(0, themes.length)]);
       }}
     >
       <svg

@@ -5,21 +5,25 @@ import ClothPiece from "./ClothPiece";
 import { calculateFinalPrice, clothValueFinder } from "./utilities";
 
 const PriceCalculator = () => {
-  const [inputValues, setInputValues] = useState({
-    clothRate: 120,
-    linenRate: 30,
-    labour: 35,
-    profit: 25,
-  });
+  const [inputValues, setInputValues] = useState(
+    JSON.parse(localStorage.getItem("inputValues")) || {
+      clothRate: 120,
+      linenRate: 30,
+      labour: 35,
+      profit: 25,
+    }
+  );
   const [calculatable, setCalculatable] = useState(false);
-  const [clothes, setClothes] = useState([
-    {
-      id: 1,
-      length: 0,
-      width: 0,
-      linenRequired: false,
-    },
-  ]);
+  const [clothes, setClothes] = useState(
+    JSON.parse(localStorage.getItem("clothes")) || [
+      {
+        id: 1,
+        length: 0,
+        width: 0,
+        linenRequired: false,
+      },
+    ]
+  );
   const priceContext = useContext(priceCtx);
   const clothSizeHandler = (e, id, trash = false) => {
     const updatedClothes = [...clothes];
@@ -47,6 +51,8 @@ const PriceCalculator = () => {
 
   useEffect(() => {
     calculateFinalPrice({ inputValues, clothes, priceContext });
+    localStorage.setItem("inputValues", JSON.stringify(inputValues));
+    localStorage.setItem("clothes", JSON.stringify(clothes));
   }, [inputValues, clothes]);
   return (
     <>
