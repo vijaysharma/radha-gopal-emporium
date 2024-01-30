@@ -50,7 +50,7 @@ const PriceCalculator = () => {
   }, [inputValues, clothes]);
   return (
     <>
-      <div className="calculator bg-primary/5">
+      <div className="calculator bg-secondary/5">
         <div className="calculatorDefaultInputs">
           <Labelnput
             labelText="Cloth/mtr"

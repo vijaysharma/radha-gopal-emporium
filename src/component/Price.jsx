@@ -6,7 +6,7 @@ const Price = () => {
 
   return (
     <div className="priceCard">
-      <div className="text-center rounded-none card bg-primary/10 shadow-xl p-2 pt-0">
+      <div className="text-center rounded-none card bg-primary/40 shadow-xl p-2 pt-0">
         <h2 className="pt-1 pb-1">
           Final Price: <strong className="text-2xl">₹{finalPrice.final}</strong>
         </h2>
