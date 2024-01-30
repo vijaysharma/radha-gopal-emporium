@@ -6,16 +6,18 @@ import { calculateFinalPrice, clothValueFinder } from "./utilities";
 
 const PriceCalculator = () => {
   const [inputValues, setInputValues] = useState(
-    JSON.parse(localStorage.getItem("inputValues")) || {
+    JSON.parse(localStorage.getItem("iv")) || {
       clothRate: 120,
       linenRate: 30,
       labour: 35,
       profit: 25,
     }
   );
-  const [calculatable, setCalculatable] = useState(false);
+  const [calculatable, setCalculatable] = useState(
+    JSON.parse(localStorage.getItem("clc")) || false
+  );
   const [clothes, setClothes] = useState(
-    JSON.parse(localStorage.getItem("clothes")) || [
+    JSON.parse(localStorage.getItem("cl")) || [
       {
         id: 1,
         length: 0,
@@ -51,8 +53,9 @@ const PriceCalculator = () => {
 
   useEffect(() => {
     calculateFinalPrice({ inputValues, clothes, priceContext });
-    localStorage.setItem("inputValues", JSON.stringify(inputValues));
-    localStorage.setItem("clothes", JSON.stringify(clothes));
+    localStorage.setItem("iv", JSON.stringify(inputValues));
+    localStorage.setItem("cl", JSON.stringify(clothes));
+    localStorage.setItem("clc", JSON.stringify(calculatable));
   }, [inputValues, clothes]);
   return (
     <>

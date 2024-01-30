@@ -39,12 +39,10 @@ const Logo = () => {
   const getRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "cupcake"
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("th") || "cupcake");
   useEffect(() => {
     window.document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("th", theme);
   }, [theme]);
 
   return (
