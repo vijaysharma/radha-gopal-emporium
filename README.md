@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Radha Gopal Emporium
+
+This project is meant to calculate manufacturing and selling cost of a product of variable sizes.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
