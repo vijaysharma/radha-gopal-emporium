@@ -70,22 +70,22 @@ const PriceCalculator = () => {
       <div className="calculator bg-secondary/5">
         <div className="calculatorDefaultInputs">
           <Labelnput
-            labelText="Cloth/mtr"
+            labelText="Cloth"
             inputValue={inputValues.clothRate}
             onChangehandler={(e) => inputOnChange(e, "clothRate")}
           />
           <Labelnput
-            labelText="Lining/mtr"
+            labelText="Lining"
             inputValue={inputValues.liningRate}
             onChangehandler={(e) => inputOnChange(e, "liningRate")}
           />
           <Labelnput
-            labelText="Lace/mtr"
+            labelText="Lace"
             inputValue={inputValues.laceRate}
             onChangehandler={(e) => inputOnChange(e, "laceRate")}
           />
           <Labelnput
-            labelText="Min. Lab."
+            labelText="Labor"
             inputValue={inputValues.labour}
             onChangehandler={(e) => inputOnChange(e, "labour")}
           />
@@ -111,7 +111,7 @@ const PriceCalculator = () => {
             />
           );
         })}
-
+        <br />
         <button
           className={`btn btn-outline btn-primary btn-xs ${
             calculatable ? "" : "btn-disabled"

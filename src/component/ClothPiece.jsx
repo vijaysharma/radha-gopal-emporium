@@ -12,9 +12,9 @@ const ClothPiece = ({
       <div className="form-control">
         <div className="label cursor-pointer">
           <span className="label-text">
-            Size L X W <strong>(In)</strong>:
+            Size <strong>(In)</strong>:
           </span>
-          <div className="max-w-28 join">
+          <div className="max-w-32 join">
             <input
               type="text"
               id={`l-${id}`}
