@@ -2,7 +2,8 @@ const ClothPiece = ({
   id,
   length,
   width,
-  linenRequired,
+  liningRequired,
+  laceRequired,
   sizeHandler,
   clothesLength,
 }) => {
@@ -13,12 +14,12 @@ const ClothPiece = ({
           <span className="label-text">
             Size L X W <strong>(In)</strong>:
           </span>
-          <div className="w-full max-w-36 join">
+          <div className="max-w-28 join">
             <input
               type="text"
               id={`l-${id}`}
               placeholder="Type the length"
-              className="input input-bordered input-primary w-full max-w-xs join-item"
+              className="input input-bordered input-primary w-full max-w-16 join-item"
               value={length}
               name="length"
               onChange={(e) => sizeHandler(e, id)}
@@ -27,7 +28,7 @@ const ClothPiece = ({
               type="text"
               id={`w-${id}`}
               placeholder="Type the Width"
-              className="input input-bordered input-primary w-full max-w-xs join-item"
+              className="input input-bordered input-primary w-full max-w-16 join-item"
               value={width}
               name="width"
               onChange={(e) => sizeHandler(e, id)}
@@ -36,12 +37,22 @@ const ClothPiece = ({
           <label className="label cursor-pointer">
             <input
               type="checkbox"
-              checked={linenRequired}
+              checked={liningRequired}
               className="checkbox checkbox-primary"
-              name="checkbox"
+              name="lining"
               onChange={(e) => sizeHandler(e, id)}
             />
-            <span className="label-text">&nbsp;&nbsp;Linen</span>
+            <span className="label-text">&nbsp;Lining</span>
+          </label>
+          <label className="label cursor-pointer">
+            <input
+              type="checkbox"
+              checked={laceRequired}
+              className="checkbox checkbox-primary"
+              name="lace"
+              onChange={(e) => sizeHandler(e, id)}
+            />
+            <span className="label-text">&nbsp;Lace</span>
           </label>
           <svg
             xmlns="http://www.w3.org/2000/svg"

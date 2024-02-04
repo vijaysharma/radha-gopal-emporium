@@ -8,9 +8,10 @@ const PriceCalculator = () => {
   const [inputValues, setInputValues] = useState(
     JSON.parse(localStorage.getItem("iv")) || {
       clothRate: 120,
-      linenRate: 30,
+      liningRate: 30,
+      laceRate: 5,
       labour: 35,
-      profit: 25,
+      profit: 40,
     }
   );
   const [calculatable, setCalculatable] = useState(
@@ -22,7 +23,8 @@ const PriceCalculator = () => {
         id: 1,
         length: 0,
         width: 0,
-        linenRequired: false,
+        liningRequired: true,
+        laceRequired: true,
       },
     ]
   );
@@ -36,7 +38,8 @@ const PriceCalculator = () => {
     });
     if (e.target.name === "length") cloth.length = e.target.value;
     if (e.target.name === "width") cloth.width = e.target.value;
-    if (e.target.name === "checkbox") cloth.linenRequired = e.target.checked;
+    if (e.target.name === "lining") cloth.liningRequired = e.target.checked;
+    if (e.target.name === "lace") cloth.laceRequired = e.target.checked;
     if (trash) updatedClothes.splice(indexOfCloth, 1);
     setClothes([...updatedClothes]);
     if (clothValueFinder(updatedClothes)) {
@@ -67,9 +70,14 @@ const PriceCalculator = () => {
             onChangehandler={(e) => inputOnChange(e, "clothRate")}
           />
           <Labelnput
-            labelText="Linen/mtr"
-            inputValue={inputValues.linenRate}
-            onChangehandler={(e) => inputOnChange(e, "linenRate")}
+            labelText="Lining/mtr"
+            inputValue={inputValues.liningRate}
+            onChangehandler={(e) => inputOnChange(e, "liningRate")}
+          />
+          <Labelnput
+            labelText="Lace/mtr"
+            inputValue={inputValues.laceRate}
+            onChangehandler={(e) => inputOnChange(e, "laceRate")}
           />
           <Labelnput
             labelText="Min. Lab."
@@ -91,7 +99,8 @@ const PriceCalculator = () => {
               id={cloth.id}
               length={cloth.length}
               width={cloth.width}
-              linenRequired={cloth.linenRequired}
+              liningRequired={cloth.liningRequired}
+              laceRequired={cloth.laceRequired}
               sizeHandler={clothSizeHandler}
               clothesLength={clothes.length}
             />
@@ -109,7 +118,7 @@ const PriceCalculator = () => {
                 id: clothes[clothes.length - 1].id + 1,
                 length: 0,
                 width: 0,
-                linenRequired: false,
+                liningRequired: false,
               },
             ]);
             setCalculatable(false);
