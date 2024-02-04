@@ -15,7 +15,7 @@ const Labelnput = ({
       </div>
       <input
         type="text"
-        placeholder="Enter"
+        placeholder={defaultSymbol}
         className="input input-bordered input-primary max-w-16"
         value={inputValue}
         onChange={(e) => onChangehandler(e)}

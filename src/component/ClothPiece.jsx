@@ -18,7 +18,7 @@ const ClothPiece = ({
             <input
               type="text"
               id={`l-${id}`}
-              placeholder="Type the length"
+              placeholder="L"
               className="input input-bordered input-primary w-full max-w-16 join-item"
               value={length}
               name="length"
@@ -27,7 +27,7 @@ const ClothPiece = ({
             <input
               type="text"
               id={`w-${id}`}
-              placeholder="Type the Width"
+              placeholder="W"
               className="input input-bordered input-primary w-full max-w-16 join-item"
               value={width}
               name="width"

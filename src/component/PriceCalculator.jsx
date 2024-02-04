@@ -5,15 +5,20 @@ import ClothPiece from "./ClothPiece";
 import { calculateFinalPrice, clothValueFinder } from "./utilities";
 
 const PriceCalculator = () => {
-  const [inputValues, setInputValues] = useState(
-    JSON.parse(localStorage.getItem("iv")) || {
+  const [inputValues, setInputValues] = useState(()=>{
+    let LsIvData = JSON.parse(localStorage.getItem("iv"));
+    if(LsIvData && LsIvData.linenRate) {
+      localStorage.removeItem("iv"); 
+      LsIvData = undefined
+    }
+    return LsIvData || {
       clothRate: 120,
       liningRate: 30,
       laceRate: 5,
       labour: 35,
       profit: 40,
     }
-  );
+  });
   const [calculatable, setCalculatable] = useState(
     JSON.parse(localStorage.getItem("clc")) || false
   );

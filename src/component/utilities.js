@@ -6,8 +6,8 @@ export const calculateFinalPrice = ({ inputValues, clothes, priceContext }) => {
   const LaceRatePerInch = parseFloatInput(inputValues.laceRate) / 39;
   const area = clothes.reduce(
     (acc, cloth) => {
-      let l = parseFloatInput(cloth.length);
-      let w = parseFloatInput(cloth.width);
+      let l = Math.max(parseFloatInput(cloth.length), parseFloatInput(cloth.width));
+      let w = Math.min(parseFloatInput(cloth.length), parseFloatInput(cloth.width));
       return {
         clarea: acc.clarea + l * w,
         lnarea: cloth.liningRequired ? acc.lnarea + l * w : acc.lnarea,
