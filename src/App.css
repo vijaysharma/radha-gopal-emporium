@@ -13,7 +13,6 @@
 .calculatorDefaultInputs {
   display: flex;
   justify-content: space-between;
-  align-items: end;
 }
 .disabled,
 .disabled:hover {

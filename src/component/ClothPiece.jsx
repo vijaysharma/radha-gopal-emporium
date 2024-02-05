@@ -16,7 +16,7 @@ const ClothPiece = ({
           </span>
           <div className="max-w-32 join">
             <input
-              type="text"
+              type="number"
               id={`l-${id}`}
               placeholder="L"
               className="input input-bordered input-primary w-full max-w-16 join-item"
@@ -25,7 +25,7 @@ const ClothPiece = ({
               onChange={(e) => sizeHandler(e, id)}
             />
             <input
-              type="text"
+              type="number"
               id={`w-${id}`}
               placeholder="W"
               className="input input-bordered input-primary w-full max-w-16 join-item"

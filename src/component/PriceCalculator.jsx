@@ -64,7 +64,7 @@ const PriceCalculator = () => {
     localStorage.setItem("iv", JSON.stringify(inputValues));
     localStorage.setItem("cl", JSON.stringify(clothes));
     localStorage.setItem("clc", JSON.stringify(calculatable));
-  }, [inputValues, clothes]);
+  }, [inputValues, clothes, calculatable]);
   return (
     <>
       <div className="calculator bg-secondary/5">

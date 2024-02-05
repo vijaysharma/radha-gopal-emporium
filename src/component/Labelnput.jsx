@@ -14,7 +14,7 @@ const Labelnput = ({
         </span>
       </div>
       <input
-        type="text"
+        type="number"
         placeholder={defaultSymbol}
         className="input input-bordered input-primary max-w-16"
         value={inputValue}
