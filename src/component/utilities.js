@@ -1,38 +1,40 @@
 const parseFloatInput = (inputValue) => parseFloat(inputValue ? inputValue : 0);
 
-export const calculateFinalPrice = ({ inputValues, clothes, priceContext }) => {
-  const clothRatePerInch = parseFloatInput(inputValues.clothRate) / (39 * 32);
-  const LiningRatePerInch = parseFloatInput(inputValues.liningRate) / (39 * 32);  
-  const LaceRatePerInch = parseFloatInput(inputValues.laceRate) / 39;
-  const area = clothes.reduce(
-    (acc, cloth) => {
-      let l = Math.max(parseFloatInput(cloth.length), parseFloatInput(cloth.width));
-      let w = Math.min(parseFloatInput(cloth.length), parseFloatInput(cloth.width));
-      return {
-        clarea: acc.clarea + l * w,
-        lnarea: cloth.liningRequired ? acc.lnarea + l * w : acc.lnarea,
-        laceLn: cloth.laceRequired ? acc.laceLn + l + w + w : acc.laceLn,
-      };
-    },
-    { clarea: 0, lnarea: 0, laceLn: 0 }
-  );
-  let clothCost =
-    area.clarea * clothRatePerInch + area.lnarea * LiningRatePerInch + area.laceLn * LaceRatePerInch;
-
-  // adding 10% wastage, stich, electricity, pouch
-  clothCost = Math.ceil(1.1 * clothCost + 5);
+export const calculateFinalPrice = ({
+  inputValues,
+  clothes,
+  setFinalPrice,
+}) => {
+  const clothCost = clothes.reduce((acc, cloth) => {
+    let clothRatePerInch = parseFloatInput(cloth.clothRate) / (39 * 32);
+    let LiningRatePerInch = parseFloatInput(cloth.liningRate) / (39 * 32);
+    let LaceRatePerInch = parseFloatInput(cloth.laceRate) / 39;
+    let l = Math.max(
+      parseFloatInput(cloth.length),
+      parseFloatInput(cloth.width)
+    );
+    let w = Math.min(
+      parseFloatInput(cloth.length),
+      parseFloatInput(cloth.width)
+    );
+    // adding 10% wastage, stich, electricity, pouch
+    return Math.ceil(
+      acc +
+        1.1 *
+          (l * w * clothRatePerInch +
+            (cloth.liningRequired ? l * w * LiningRatePerInch : 0) +
+            (cloth.laceRequired ? (l + w + w) * LaceRatePerInch : 0))
+    );
+  }, 5);
   const labourCost = Math.max(
     parseFloatInput(inputValues.labour),
-    Math.ceil(
-      area.clarea * clothRatePerInch * 1.5 +
-        area.lnarea * LiningRatePerInch * 1.1
-    )
+    Math.ceil(clothCost * 1.4)
   );
   const profit = Math.ceil(
     (parseFloatInput(inputValues.profit) / 100) * (clothCost + labourCost)
   );
   const finalPrice = clothCost + labourCost + profit;
-  priceContext.setFinalPrice({
+  setFinalPrice({
     material: clothCost,
     labour: labourCost,
     profit: profit,

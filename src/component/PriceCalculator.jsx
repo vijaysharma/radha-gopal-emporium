@@ -5,35 +5,45 @@ import ClothPiece from "./ClothPiece";
 import { calculateFinalPrice, clothValueFinder } from "./utilities";
 
 const PriceCalculator = () => {
-  const [inputValues, setInputValues] = useState(()=>{
+  const [inputValues, setInputValues] = useState(() => {
     let LsIvData = JSON.parse(localStorage.getItem("iv"));
-    if(LsIvData && LsIvData.linenRate) {
-      localStorage.removeItem("iv"); 
-      LsIvData = undefined
+    if (LsIvData && LsIvData.clothRate) {
+      localStorage.removeItem("iv");
+      LsIvData = undefined;
     }
-    return LsIvData || {
-      clothRate: 120,
-      liningRate: 30,
-      laceRate: 5,
-      labour: 35,
-      profit: 40,
-    }
+    return (
+      LsIvData || {
+        labour: 35,
+        profit: 40,
+      }
+    );
   });
   const [calculatable, setCalculatable] = useState(
     JSON.parse(localStorage.getItem("clc")) || false
   );
-  const [clothes, setClothes] = useState(
-    JSON.parse(localStorage.getItem("cl")) || [
-      {
-        id: 1,
-        length: 0,
-        width: 0,
-        liningRequired: true,
-        laceRequired: true,
-      },
-    ]
-  );
+  const [clothes, setClothes] = useState(() => {
+    let ClIvData = JSON.parse(localStorage.getItem("cl"));
+    if (ClIvData && !ClIvData[0].clothRate) {
+      localStorage.removeItem("cl");
+    }
+    return (
+      ClIvData || [
+        {
+          id: 1,
+          length: 0,
+          width: 0,
+          clothRate: 120,
+          liningRate: 30,
+          laceRate: 5,
+          liningRequired: true,
+          laceRequired: true,
+        },
+      ]
+    );
+  });
+
   const priceContext = useContext(priceCtx);
+  const setFinalPrice = priceContext.setFinalPrice;
   const clothSizeHandler = (e, id, trash = false) => {
     const updatedClothes = [...clothes];
     let indexOfCloth;
@@ -41,6 +51,9 @@ const PriceCalculator = () => {
       indexOfCloth = index;
       return cl.id === id;
     });
+    if (e.target.name === "clothRate") cloth.clothRate = e.target.value;
+    if (e.target.name === "liningRate") cloth.liningRate = e.target.value;
+    if (e.target.name === "laceRate") cloth.laceRate = e.target.value;
     if (e.target.name === "length") cloth.length = e.target.value;
     if (e.target.name === "width") cloth.width = e.target.value;
     if (e.target.name === "lining") cloth.liningRequired = e.target.checked;
@@ -60,48 +73,38 @@ const PriceCalculator = () => {
     });
 
   useEffect(() => {
-    calculateFinalPrice({ inputValues, clothes, priceContext });
+    calculateFinalPrice({ inputValues, clothes, setFinalPrice });
     localStorage.setItem("iv", JSON.stringify(inputValues));
     localStorage.setItem("cl", JSON.stringify(clothes));
     localStorage.setItem("clc", JSON.stringify(calculatable));
-  }, [inputValues, clothes, calculatable]);
+  }, [inputValues, clothes, calculatable, setFinalPrice]);
   return (
     <>
       <div className="calculator bg-secondary/5">
         <div className="calculatorDefaultInputs">
           <Labelnput
-            labelText="Cloth"
-            inputValue={inputValues.clothRate}
-            onChangehandler={(e) => inputOnChange(e, "clothRate")}
-          />
-          <Labelnput
-            labelText="Lining"
-            inputValue={inputValues.liningRate}
-            onChangehandler={(e) => inputOnChange(e, "liningRate")}
-          />
-          <Labelnput
-            labelText="Lace"
-            inputValue={inputValues.laceRate}
-            onChangehandler={(e) => inputOnChange(e, "laceRate")}
-          />
-          <Labelnput
             labelText="Labor"
+            name="labor"
             inputValue={inputValues.labour}
             onChangehandler={(e) => inputOnChange(e, "labour")}
           />
           <Labelnput
             labelText="Profit"
+            name="profit"
             inputValue={inputValues.profit}
             defaultSymbol="%"
             onChangehandler={(e) => inputOnChange(e, "profit")}
           />
         </div>
-        <br />
+
         {clothes.map((cloth) => {
           return (
             <ClothPiece
               key={cloth.id}
               id={cloth.id}
+              clothRate={cloth.clothRate}
+              liningRate={cloth.liningRate}
+              laceRate={cloth.laceRate}
               length={cloth.length}
               width={cloth.width}
               liningRequired={cloth.liningRequired}
@@ -123,7 +126,11 @@ const PriceCalculator = () => {
                 id: clothes[clothes.length - 1].id + 1,
                 length: 0,
                 width: 0,
+                clothRate: 120,
+                liningRate: 30,
+                laceRate: 5,
                 liningRequired: false,
+                laceRequired: false,
               },
             ]);
             setCalculatable(false);

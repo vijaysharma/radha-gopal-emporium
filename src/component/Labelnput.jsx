@@ -1,6 +1,7 @@
 import React from "react";
 
 const Labelnput = ({
+  name,
   labelText,
   inputValue,
   defaultSymbol = "₹",
@@ -15,8 +16,9 @@ const Labelnput = ({
       </div>
       <input
         type="number"
+        name={name}
         placeholder={defaultSymbol}
-        className="input input-bordered input-primary max-w-16"
+        className="input input-bordered input-primary max-w-20"
         value={inputValue}
         onChange={(e) => onChangehandler(e)}
       />

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import Logo from "./component/Logo";
 import Price from "./component/Price";

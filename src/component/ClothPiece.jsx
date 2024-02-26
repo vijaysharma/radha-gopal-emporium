@@ -1,5 +1,9 @@
+import Labelnput from "./Labelnput";
 const ClothPiece = ({
   id,
+  clothRate,
+  liningRate,
+  laceRate,
   length,
   width,
   liningRequired,
@@ -9,7 +13,27 @@ const ClothPiece = ({
 }) => {
   return (
     <>
-      <div className="form-control">
+      <div className="form-control border border-primary p-2 mt-2">
+        <div className="label cursor-pointer">
+          <Labelnput
+            labelText="Cloth"
+            inputValue={clothRate}
+            name="clothRate"
+            onChangehandler={(e) => sizeHandler(e, id)}
+          />
+          <Labelnput
+            labelText="Lining"
+            name="liningRate"
+            inputValue={liningRate}
+            onChangehandler={(e) => sizeHandler(e, id)}
+          />
+          <Labelnput
+            labelText="Lace"
+            name="laceRate"
+            inputValue={laceRate}
+            onChangehandler={(e) => sizeHandler(e, id)}
+          />
+        </div>
         <div className="label cursor-pointer">
           <span className="label-text">
             Size <strong>(In)</strong>:
