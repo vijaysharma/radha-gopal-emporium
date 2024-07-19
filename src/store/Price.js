@@ -1,0 +1,10 @@
+export const PRICE = {
+  LABOR: 50,
+  PROFIT: 40,
+  CLOTH: 120,
+  LINING: 30,
+  LACE: 10,
+  POUCH: 5,
+  WASTAGEPERCENTAGE: 10,
+  LABORFACTOR: 1.5,
+};

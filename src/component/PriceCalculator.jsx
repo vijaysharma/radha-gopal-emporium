@@ -3,18 +3,15 @@ import { priceCtx } from "../store/priceContext";
 import Labelnput from "./Labelnput";
 import ClothPiece from "./ClothPiece";
 import { calculateFinalPrice, clothValueFinder } from "./utilities";
+import { PRICE } from "../store/Price";
 
 const PriceCalculator = () => {
   const [inputValues, setInputValues] = useState(() => {
     let LsIvData = JSON.parse(localStorage.getItem("iv"));
-    if (LsIvData && LsIvData.clothRate) {
-      localStorage.removeItem("iv");
-      LsIvData = undefined;
-    }
     return (
       LsIvData || {
-        labour: 35,
-        profit: 40,
+        labour: PRICE.LABOR,
+        profit: PRICE.PROFIT,
       }
     );
   });
@@ -32,9 +29,9 @@ const PriceCalculator = () => {
           id: 1,
           length: 0,
           width: 0,
-          clothRate: 120,
-          liningRate: 30,
-          laceRate: 5,
+          clothRate: PRICE.CLOTH,
+          liningRate: PRICE.LINING,
+          laceRate: PRICE.LACE,
           liningRequired: true,
           laceRequired: true,
         },
@@ -120,15 +117,16 @@ const PriceCalculator = () => {
             calculatable ? "" : "btn-disabled"
           }`}
           onClick={() => {
+            const prevCloth = clothes[clothes.length - 1];
             setClothes([
               ...clothes,
               {
-                id: clothes[clothes.length - 1].id + 1,
+                id: prevCloth.id + 1,
                 length: 0,
                 width: 0,
-                clothRate: 120,
-                liningRate: 30,
-                laceRate: 5,
+                clothRate: prevCloth.clothRate,
+                liningRate: prevCloth.liningRate,
+                laceRate: prevCloth.laceRate,
                 liningRequired: false,
                 laceRequired: false,
               },

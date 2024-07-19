@@ -1,3 +1,5 @@
+import { PRICE } from "../store/Price";
+
 const parseFloatInput = (inputValue) => parseFloat(inputValue ? inputValue : 0);
 
 export const calculateFinalPrice = ({
@@ -20,15 +22,15 @@ export const calculateFinalPrice = ({
     // adding 10% wastage, stich, electricity, pouch
     return Math.ceil(
       acc +
-        1.1 *
+        (1 + PRICE.WASTAGEPERCENTAGE / 100) *
           (l * w * clothRatePerInch +
             (cloth.liningRequired ? l * w * LiningRatePerInch : 0) +
             (cloth.laceRequired ? (l + w + w) * LaceRatePerInch : 0))
     );
-  }, 5);
+  }, PRICE.POUCH);
   const labourCost = Math.max(
     parseFloatInput(inputValues.labour),
-    Math.ceil(clothCost * 1.4)
+    Math.ceil(clothCost * PRICE.LABORFACTOR)
   );
   const profit = Math.ceil(
     (parseFloatInput(inputValues.profit) / 100) * (clothCost + labourCost)
